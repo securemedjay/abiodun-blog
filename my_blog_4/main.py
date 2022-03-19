@@ -11,10 +11,14 @@ from sqlalchemy.exc import IntegrityError
 from flask_gravatar import Gravatar
 from functools import wraps
 from datetime import datetime
+import os
+from dotenv import load_dotenv  # to use environment variables
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+load_dotenv("/Users/abiodunajibola/Documents/EnvironmentVariables/.env")
+app.config["SECRET_KEY"] = os.getenv("session_key")
+# app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
