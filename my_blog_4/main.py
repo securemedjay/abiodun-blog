@@ -22,7 +22,9 @@ ckeditor = CKEditor(app)
 Bootstrap(app)
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "sqlite:///blog.db")  # DATABASE_URL is an
+# environment variable for POSTGRES db on the production server. ("DATABASE_URL", "sqlite:///blog.db") allows to run
+# the code on sqlite (development server) if postgres in not available.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
