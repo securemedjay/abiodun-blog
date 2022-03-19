@@ -17,7 +17,7 @@ from dotenv import load_dotenv  # to use environment variables
 
 app = Flask(__name__)
 load_dotenv("/Users/abiodunajibola/Documents/EnvironmentVariables/.env")
-app.config["SECRET_KEY"] = os.getenv("session_key")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
