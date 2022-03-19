@@ -10,6 +10,7 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from sqlalchemy.exc import IntegrityError
 from flask_gravatar import Gravatar
 from functools import wraps
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -230,6 +231,10 @@ def delete_post(post_id):
     db.session.delete(post_to_delete)
     db.session.commit()
     return redirect(url_for('get_all_posts'))
+
+def footer():
+    current_year = datetime.now().year
+    render_template("footer.html", current_year=current_year)
 
 
 if __name__ == "__main__":
