@@ -751,34 +751,82 @@
                     </div>
                 </div>
                 <div class="col-lg-8 mt-5 mt-lg-0">
-                    <form action="https://bootstrapmade.com/demo/templates/MyResume/forms/contact.php"
-                          method="post" role="form" class="php-email-form">
-                        <div class="row">
-                            <div class="col-md-6 form-group"><input type="text" name="name"
-                                                                    class="form-control" id="name"
-                                                                    placeholder="Your Name" required="">
+                    {% if msg: %}
+                        <span style="color:red">{{ msg }}</span>
+                    {% else: %}
+                        <form action="{{ url_for('home') }}" method="post" novalidate>
+                            {{ form.csrf_token }}
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <p>
+                                        {{ form.name.label }} <br> {{ form.name(size = 50) }}
+                                        {% for err in form.name.errors: %}
+                                            <span style="color:red">{{ err }}</span>
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <p>
+                                        {{ form.email.label }} <br> {{ form.email(size = 54) }}
+                                        {% for err in form.email.errors: %}
+                                            <span style="color:red">{{ err }}</span>
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <p>
+                                        {{ form.subject.label }} <br> {{ form.subject(size = 117) }}
+                                        {% for err in form.subject.errors: %}
+                                            <span style="color:red">{{ err }}</span>
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <p>
+                                        {{ form.body.label }} <br> {{ form.body }}
+                                        {% for err in form.body.errors: %}
+                                            <span style="color:red">{{ err }}</span>
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                                <div class="text-center">
+                                   {{ form.submit }}
+                                </div>
                             </div>
-                            <div class="col-md-6 form-group mt-3 mt-md-0"><input type="email"
-                                                                                 class="form-control"
-                                                                                 name="email" id="email"
-                                                                                 placeholder="Your Email"
-                                                                                 required=""></div>
-                        </div>
-                        <div class="form-group mt-3"><input type="text" class="form-control" name="subject"
-                                                            id="subject" placeholder="Subject" required="">
-                        </div>
-                        <div class="form-group mt-3"><textarea class="form-control" name="message" rows="5"
-                                                               placeholder="Message" required=""></textarea>
-                        </div>
-                        <div class="my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit">Send Message</button>
-                        </div>
+                        </form>
+                        {{ ckeditor.load() }}
+                        {{ ckeditor.config(name='body', enterMode='CKEDITOR.ENTER_BR') }}
+                    {% endif %}
+
                     </form>
+<!--                    <form action="https://bootstrapmade.com/demo/templates/MyResume/forms/contact.php"-->
+<!--                          method="post" role="form" class="php-email-form">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-6 form-group"><input type="text" name="name"-->
+<!--                                                                    class="form-control" id="name"-->
+<!--                                                                    placeholder="Your Name" required="">-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6 form-group mt-3 mt-md-0"><input type="email"-->
+<!--                                                                                 class="form-control"-->
+<!--                                                                                 name="email" id="email"-->
+<!--                                                                                 placeholder="Your Email"-->
+<!--                                                                                 required=""></div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group mt-3"><input type="text" class="form-control" name="subject"-->
+<!--                                                            id="subject" placeholder="Subject" required="">-->
+<!--                        </div>-->
+<!--                        <div class="form-group mt-3"><textarea class="form-control" name="message" rows="5"-->
+<!--                                                               placeholder="Message" required=""></textarea>-->
+<!--                        </div>-->
+<!--                        <div class="my-3">-->
+<!--                            <div class="loading">Loading</div>-->
+<!--                            <div class="error-message"></div>-->
+<!--                            <div class="sent-message">Your message has been sent. Thank you!</div>-->
+<!--                        </div>-->
+<!--                        <div class="text-center">-->
+<!--                            <button type="submit">Send Message</button>-->
+<!--                        </div>-->
+<!--                    </form>-->
                 </div>
             </div>
         </div>
@@ -796,7 +844,8 @@
                 <a href="https://github.com/securemedjay" class="github"><i class="bx bxl-github"></i></a>
                 <a href="https://join.skype.com/invite/bF0LEeVgXuBi" class="google-plus"><i class="bx bxl-skype"></i></a>
         </div>
-        <div class="copyright"> © Copyright 2022&nbsp;<strong><span>Abiodun Ajibola</span></strong>.&nbsp;</div>
+        <div class="copyright"> © Copyright {{ current_year }}&nbsp;<strong><span>Abiodun Ajibola</span></strong>.&nbsp;
+        </div>
         <div class="copyright">All Rights Reserved</div>
         <div class="credits"> Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a></div>
     </div>

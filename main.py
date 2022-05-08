@@ -9,13 +9,15 @@ from flask_sqlalchemy import SQLAlchemy  # to use python enabled SQL commands. F
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user  # to manage
 # user session for flask e.g. logging in, logging out, remembering users; sessions
-from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
+from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm, ContactForm
 from sqlalchemy.exc import IntegrityError
 from flask_gravatar import Gravatar
 from functools import wraps
 from datetime import datetime
 import os
 from dotenv import load_dotenv  # to use environment variables
+from messenger import Messenger
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -40,6 +42,8 @@ login_manager.init_app(app)
 
 gravatar = Gravatar(app, size=100, rating="g", default="retro", force_default=False, force_lower=False, use_ssl=False,
                     base_url=None)
+
+current_year = datetime.now().year
 
 # CREATE A DATABASE TABLE CALLED USER
 class User(UserMixin, db.Model):  # User is the parent table
@@ -110,9 +114,19 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
-    return render_template("web/web.html")
+    form = ContactForm()
+    sent_notification = ""
+    if form.validate_on_submit():
+        name = form.name.data
+        email = form.email.data
+        subject = form.subject.data
+        message = form.body.data
+        messenger = Messenger(name=name, email=email, subject=subject, message=message)
+        # messenger.send_message()
+        sent_notification = "Thank you for your message. I will check and get back."
+    return render_template("web/web.html", form=form, msg=sent_notification, current_year=current_year)
 
 @app.route('/blog')
 def get_all_posts():
@@ -195,9 +209,19 @@ def about():
     return render_template("about.html", logged_in=current_user.is_authenticated)
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["POST", "GET"])
 def contact():
-    return render_template("contact.html", logged_in=current_user.is_authenticated)
+    form = ContactForm()
+    sent_notification = ""
+    if form.validate_on_submit():
+        name = form.name.data
+        email = form.email.data
+        subject = form.subject.data
+        message = form.body.data
+        messenger = Messenger(name=name, email=email, subject=subject, message=message)
+        messenger.send_message()
+        sent_notification = "Thank you for your message. I will check and get back."
+    return render_template("contact.html", logged_in=current_user.is_authenticated, form=form, msg=sent_notification)
 
 
 @app.route("/new-post", methods=["POST", "GET"])
