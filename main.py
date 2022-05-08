@@ -13,7 +13,6 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm, ContactF
 from sqlalchemy.exc import IntegrityError
 from flask_gravatar import Gravatar
 from functools import wraps
-from datetime import datetime
 import os
 from dotenv import load_dotenv  # to use environment variables
 from messenger import Messenger

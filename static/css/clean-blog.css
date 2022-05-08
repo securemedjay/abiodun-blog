@@ -35,7 +35,7 @@ a {
 }
 
 a:focus, a:hover {
-  color: #0085A1;
+  color: #a15800;
 }
 
 blockquote {
@@ -475,8 +475,8 @@ footer .copyright {
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #fff;
-  background-color: #00657b !important;
-  border-color: #00657b !important;
+  background-color: #e37806;;
+  border-color: #e37806;;
 }
 
 .btn-lg {

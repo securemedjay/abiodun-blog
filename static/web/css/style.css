@@ -19,7 +19,7 @@ a {
 }
 
 a:hover {
-  color: #067ded;
+  color: #eda806;
   text-decoration: none;
 }
 
@@ -253,7 +253,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #hero:before {
   content: "";
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.0);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -306,10 +306,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 #hero .profile-image {
-  width: 30%;
+  width: 15%;
   position: absolute;
   right: 10%;
-  top: 20%;
+  top: 30%;
 }
 
 /*--------------------------------------------------------------
