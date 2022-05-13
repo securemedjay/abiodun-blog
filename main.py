@@ -123,7 +123,7 @@ def home():
         subject = form.subject.data
         message = form.body.data
         messenger = Messenger(name=name, email=email, subject=subject, message=message)
-        # messenger.send_message()
+        messenger.send_message()
         sent_notification = "Thank you for your message. I will check and get back."
     return render_template("web/web.html", form=form, msg=sent_notification, current_year=current_year)
 
@@ -166,7 +166,7 @@ def login():
             # check_password
             if check_password_hash(user_to_login.password, form.password.data):
                 login_user(user_to_login)
-                print(user_to_login)
+                # print(user_to_login)
                 return redirect(url_for("get_all_posts"))
             else:
                 flash("Password Incorrect, please try again")
@@ -272,9 +272,9 @@ def delete_post(post_id):
     db.session.commit()
     return redirect(url_for('get_all_posts'))
 
-def footer():
-    current_year = datetime.now().year
-    render_template("footer.html", current_year=current_year)
+# def footer():
+#     current_year = datetime.now().year
+#     render_template("footer.html", current_year=current_year)
 
 
 if __name__ == "__main__":
