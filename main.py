@@ -197,7 +197,7 @@ def show_post(post_id):
             db.session.add(new_comment)
             db.session.commit()
         else:
-            flash("Please login or register to comment")
+            flash("Please login or register to comment.")
             return redirect(url_for("login"))
     return render_template("post.html", post=requested_post, logged_in=current_user.is_authenticated, form=form,
                            current_user=current_user, comments=requested_post.comments)
