@@ -1054,3 +1054,11 @@ section {
 #footer .credits {
   font-size: 13px;
 }
+
+
+.blog-link {
+  color: white;
+  top: 1rem;
+  left: 80rem;
+  position: absolute;
+}
